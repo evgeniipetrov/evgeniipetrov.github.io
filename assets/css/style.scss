@@ -23,3 +23,18 @@ h1, h2, h3, h4, h5, h6
     font-weight: 100;
     font-size: 64px;
 }
+
+#header_wrap 
+{
+    background: #250041; 
+    background: -moz-linear-gradient(top, #4B0082, #250041); 
+    background: -webkit-linear-gradient(top, #4B0082, #250041); 
+    background: -ms-linear-gradient(top, #4B0082, #250041); 
+    background: -o-linear-gradient(top, #4B0082, #250041); 
+    background: linear-gradient(to top, #4B0082, #250041); 
+}
+
+#footer_wrap 
+{
+    background: #250041; 
+}

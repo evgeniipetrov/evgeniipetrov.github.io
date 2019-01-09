@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Converter</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+        textarea
+        {
+            resize: none;
+            width: 33%;
+            height: 200px;
+        }
+
+        .main div{
+            padding: 4px;
+        }
+    </style>
+</head>
+
+<body onload="init()">
+    <div class=main>
+        <div>
+            <span>Конвертировать текст, набранный по-русски, но с немецкой раскладкой клавиатуры, в русский:</span>
+        </div>
+        <div>
+            <textarea autofocus id="original"></textarea>
+        </div>
+        <div>
+            <input type="button" value="Конвертировать >" onclick="convertDeRu()">
+        </div>
+        <div>
+            <textarea readonly id="result"></textarea>
+        </div>
+        <div>
+            <input type="button" value="Копировать" onclick="copy()">
+        </div>
+    </div>
+</body>
+
+<script>
+    function init()
+    {
+        de = "°!\"§$%&/()=?`QWERTZUIOPÜ*'ASDFGHJKLÖÄYXCVBNM;:_^ß´qwertzuiopü+#asdfghjklöäyxcvbnm,.-";
+        ru = "Ё!\"№;%:?*()_+ЙЦУКЕНГШЩЗХЪ/ФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,ё-=йцукенгшщзхъ\\фывапролджэячсмитьбю.";
+
+        dictionary = new Object();
+
+        for (var i = 0; i < de.length; i++) {
+            dictionary[de[i]] = ru[i];
+        }
+    }
+
+    function convertDeRu()
+    {
+        var data = document.getElementById("original").value;
+
+        var result = "";
+        var rep;
+
+        for (i = 0; i < data.length; i++) {
+            rep = dictionary[data[i]];
+
+            if (rep == null) {
+                rep = data[i];
+            }
+
+            result += rep;
+        }
+
+        document.getElementById("result").value = result;
+    }
+
+    function copy()
+    {
+        document.getElementById("result").select();
+        document.execCommand("copy");
+        getSelection().removeAllRanges();
+    }
+</script>
+
+</html>

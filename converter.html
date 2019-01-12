@@ -28,13 +28,15 @@
 <body onload="init()">
     <div class=main>
         <div>
-            <span>Конвертировать текст, набранный по-русски, но с немецкой раскладкой клавиатуры, в русский:</span>
+            <span>Конвертировать текст, набранный по-русски, но с немецкой раскладкой клавиатуры, в русский (и
+                наоборот):</span>
         </div>
         <div>
             <textarea autofocus id="original"></textarea>
         </div>
         <div>
-            <input type="button" value="Конвертировать >" onclick="convertDeRu()">
+            <input type="button" value="Конвертировать в русский>" onclick="convertDeRu()">
+            <input type="button" value="Конвертировать в немецкий>" onclick="convertRuDe()">
         </div>
         <div>
             <textarea id="result"></textarea>
@@ -46,27 +48,27 @@
 </body>
 
 <script>
-    function init()
-    {
+    function init() {
         de = "°!\"§$%&/()=?`QWERTZUIOPÜ*'ASDFGHJKLÖÄYXCVBNM;:_^ß´qwertzuiopü+#asdfghjklöäyxcvbnm,.-";
         ru = "Ё!\"№;%:?*()_+ЙЦУКЕНГШЩЗХЪ/ФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,ё-=йцукенгшщзхъ\\фывапролджэячсмитьбю.";
 
-        dictionary = new Object();
+        dictionaryDeRu = new Object();
+        dictionaryRuDe = new Object();
 
         for (var i = 0; i < de.length; i++) {
-            dictionary[de[i]] = ru[i];
+            dictionaryDeRu[de[i]] = ru[i];
+            dictionaryRuDe[ru[i]] = de[i];
         }
     }
 
-    function convertDeRu()
-    {
+    function convertDeRu() {
         var data = document.getElementById("original").value;
 
         var result = "";
         var rep;
 
         for (var i = 0; i < data.length; i++) {
-            rep = dictionary[data[i]];
+            rep = dictionaryDeRu[data[i]];
 
             if (rep == null) {
                 rep = data[i];
@@ -78,8 +80,26 @@
         document.getElementById("result").value = result;
     }
 
-    function copy()
-    {
+    function convertRuDe() {
+        var data = document.getElementById("original").value;
+
+        var result = "";
+        var rep;
+
+        for (var i = 0; i < data.length; i++) {
+            rep = dictionaryRuDe[data[i]];
+
+            if (rep == null) {
+                rep = data[i];
+            }
+
+            result += rep;
+        }
+
+        document.getElementById("result").value = result;
+    }
+
+    function copy() {
         document.getElementById("result").select();
         document.execCommand("copy");
         getSelection().removeAllRanges();

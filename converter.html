@@ -62,32 +62,21 @@
     }
 
     function convertDeRu() {
-        var data = document.getElementById("original").value;
-
-        var result = "";
-        var rep;
-
-        for (var i = 0; i < data.length; i++) {
-            rep = dictionaryDeRu[data[i]];
-
-            if (rep == null) {
-                rep = data[i];
-            }
-
-            result += rep;
-        }
-
-        document.getElementById("result").value = result;
+        convert(dictionaryDeRu);
     }
 
     function convertRuDe() {
+        convert(dictionaryRuDe);
+    }
+
+    function convert(locale) {
         var data = document.getElementById("original").value;
 
         var result = "";
         var rep;
 
         for (var i = 0; i < data.length; i++) {
-            rep = dictionaryRuDe[data[i]];
+            rep = locale[data[i]];
 
             if (rep == null) {
                 rep = data[i];

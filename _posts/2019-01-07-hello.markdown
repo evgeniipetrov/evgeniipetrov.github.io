@@ -4,7 +4,14 @@ title:  "Global .gitignore file"
 date:   2019-01-08
 ---
 
+How to get rid of requirement to put IDE configs and other system-specific files into gitignore for every project? Looks like there is also a global (workstation-wide) gitignore:
+
+**Linux/Mac:**
 ```shell
 git config --global core.excludesfile ~/.gitignore_global
 ```
 
+**Windows:**
+```shell
+git config --global core.excludesfile %USERPROFILE%\.gitignore
+```
